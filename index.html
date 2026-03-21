@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZeeBot Mobile Prototype</title>
+  <link rel="stylesheet" href="styles.css?v=20260321c" />
+</head>
+<body>
+  <main class="device-stage">
+    <div class="phone-frame">
+      <div class="status-bar">
+        <span>9:41</span>
+        <div class="status-icons">
+          <span>5G</span>
+          <span>📶</span>
+          <span>87%</span>
+        </div>
+      </div>
+
+      <header class="app-header">
+        <div class="app-header-top">
+          <div>
+            <div class="eyebrow">ZeeBot Companion</div>
+            <div class="title-row">
+              <h1 id="screenTitle">Main</h1>
+              <span class="live-pill">Connected</span>
+            </div>
+            <p id="screenSubtitle">Conversation with ZeeBot</p>
+          </div>
+          <button class="avatar-btn">Z</button>
+        </div>
+
+        <div class="hero-card" id="chatHero">
+          <div>
+            <div class="hero-title">A calmer, more premium assistant UI</div>
+            <div class="hero-sub">Less dashboard, more conversation. Fast jumps into focused agent threads when needed.</div>
+          </div>
+          <button class="hero-action" id="openSubagentBtn">+ New subagent</button>
+        </div>
+
+        <div class="agent-switcher">
+          <button class="agent-pill active" data-agent="main">Main</button>
+          <button class="agent-pill" data-agent="research">Research</button>
+          <button class="agent-pill" data-agent="coding">Coding</button>
+          <button class="agent-pill" data-agent="ops">Ops</button>
+        </div>
+      </header>
+
+      <section class="screen active" id="screen-chat">
+        <div class="section-scroll chat-screen">
+          <div class="prompt-hint">What do you want to work on today?</div>
+
+          <div class="messages" id="messages">
+            <div class="msg bot">
+              <div class="avatar-mini">Z</div>
+              <div class="msg-body">
+                <div class="bubble">Morning. Want to stay in main, or switch to a specialist subagent for a focused thread?</div>
+                <div class="meta">ZeeBot · 9:02 AM</div>
+              </div>
+            </div>
+
+            <div class="msg user">
+              <div class="msg-body">
+                <div class="bubble">Show me the Android app concept first.</div>
+                <div class="meta">You · 9:03 AM</div>
+              </div>
+            </div>
+
+            <div class="msg bot">
+              <div class="avatar-mini">Z</div>
+              <div class="msg-body">
+                <div class="bubble with-audio">
+                  Here’s the updated direction: more ChatGPT-mobile feel, cleaner spacing, and thread-based handoff into subagents instead of trying to do everything in one place.
+                  <div class="assistant-actions">
+                    <button class="play-btn">▶ Play voice</button>
+                    <button class="play-btn" data-screen-jump="threads">↗ Open threads</button>
+                  </div>
+                </div>
+                <div class="meta">ZeeBot · 9:03 AM</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="suggestion-row compact">
+            <button class="suggest-chip">Summarize today</button>
+            <button class="suggest-chip">Open research thread</button>
+            <button class="suggest-chip">Reply by voice</button>
+          </div>
+        </div>
+
+        <div class="composer-wrap">
+          <div class="attachment-bar" id="attachmentBar">
+            <button class="attachment-chip">📄 carro-process-map.pdf</button>
+            <button class="attachment-chip">🎤 voice-note.m4a</button>
+          </div>
+          <div class="composer-card premium with-ptt">
+            <button class="round-btn" id="attachBtn" title="Attach file">📎</button>
+            <input id="chatInput" type="text" placeholder="Type a message to ZeeBot..." />
+            <button class="ptt-btn" id="pttBtn">Hold to talk</button>
+            <button class="send-btn" id="sendBtn">➤</button>
+          </div>
+          <div class="composer-hint">Type, attach files, or hold to talk.</div>
+        </div>
+      </section>
+
+      <section class="screen" id="screen-threads">
+        <div class="section-scroll stack-gap">
+          <div class="threads-header-card">
+            <div>
+              <div class="context-title">Threads</div>
+              <div class="context-sub">Main stays broad. Subagents hold focused workstreams.</div>
+            </div>
+            <button class="hero-action small-action" id="openSubagentBtn2">+ New</button>
+          </div>
+
+          <button class="thread-card active-thread" data-thread-agent="main">
+            <div class="thread-top">
+              <div>
+                <div class="thread-title">Main</div>
+                <div class="thread-sub">General conversation with ZeeBot</div>
+              </div>
+              <div class="thread-time">now</div>
+            </div>
+            <div class="thread-preview">Working through mobile app direction and product shape.</div>
+          </button>
+
+          <button class="thread-card" data-thread-agent="research">
+            <div class="thread-top">
+              <div>
+                <div class="thread-title">Research — Android app landscape</div>
+                <div class="thread-sub">Research subagent</div>
+              </div>
+              <div class="thread-time">12m</div>
+            </div>
+            <div class="thread-preview">Comparing ChatterUI, voice interaction patterns, and reuse options.</div>
+          </button>
+
+          <button class="thread-card" data-thread-agent="coding">
+            <div class="thread-top">
+              <div>
+                <div class="thread-title">Coding — Prototype implementation</div>
+                <div class="thread-sub">Coding subagent</div>
+              </div>
+              <div class="thread-time">1h</div>
+            </div>
+            <div class="thread-preview">Building web prototype, refining mobile feel, preparing for native path.</div>
+          </button>
+
+          <button class="thread-card" data-thread-agent="ops">
+            <div class="thread-top">
+              <div>
+                <div class="thread-title">Ops — Backend/API shape</div>
+                <div class="thread-sub">Ops subagent</div>
+              </div>
+              <div class="thread-time">2h</div>
+            </div>
+            <div class="thread-preview">Session routing, upload flow, reply mode semantics, security boundary.</div>
+          </button>
+        </div>
+      </section>
+
+      <section class="screen" id="screen-voice">
+        <div class="section-scroll voice-layout">
+          <div class="voice-mode-card soft-card">
+            <div class="voice-orb" id="voiceOrb">🎙</div>
+            <div class="voice-title">Talk naturally</div>
+            <div class="voice-sub" id="voiceStatus">Tap to start speaking to the selected agent.</div>
+            <div class="voice-toggle-row">
+              <button class="secondary-btn active-soft">Text + voice</button>
+              <button class="secondary-btn">Voice only</button>
+            </div>
+            <button class="primary-btn" id="startVoiceBtn">Start listening</button>
+          </div>
+
+          <div class="sheet-card transcript-card">
+            <div class="mini-label">Live transcript</div>
+            <p>“Switch me to the research agent and summarize the market structure.”</p>
+          </div>
+
+          <div class="sheet-card transcript-card">
+            <div class="mini-label">Voice reply</div>
+            <p>Research agent is ready. I can answer in text, voice, or both.</p>
+            <button class="play-btn">▶ Play response</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen" id="screen-attachments">
+        <div class="section-scroll stack-gap">
+          <div class="sheet-card upload-card soft-card">
+            <div class="upload-badge">⬆</div>
+            <div class="attachment-title">Upload attachments</div>
+            <div class="attachment-sub">Images, PDFs, docs, audio notes</div>
+            <div class="attachment-actions">
+              <button class="primary-btn">Choose file</button>
+              <button class="secondary-btn">Take photo</button>
+            </div>
+          </div>
+
+          <div class="sheet-card file-row">
+            <div>
+              <div class="file-name">carro-process-map.pdf</div>
+              <div class="file-meta">2.1 MB · Ready to send</div>
+            </div>
+            <button class="secondary-btn small">Attach</button>
+          </div>
+
+          <div class="sheet-card file-row">
+            <div>
+              <div class="file-name">voice-note.m4a</div>
+              <div class="file-meta">38 sec · Transcribe + send</div>
+            </div>
+            <button class="secondary-btn small">Attach</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen" id="screen-settings">
+        <div class="section-scroll stack-gap">
+          <div class="sheet-card setting-row">
+            <div>
+              <div class="setting-title">Default reply mode</div>
+              <div class="setting-sub">Text, voice, or both</div>
+            </div>
+            <select>
+              <option>Both</option>
+              <option>Text only</option>
+              <option>Voice only</option>
+            </select>
+          </div>
+
+          <div class="sheet-card setting-row">
+            <div>
+              <div class="setting-title">Auto-play voice reply</div>
+              <div class="setting-sub">Play audio automatically when available</div>
+            </div>
+            <label class="switch"><input type="checkbox" checked><span></span></label>
+          </div>
+
+          <div class="sheet-card setting-stack">
+            <div>
+              <div class="setting-title">Backend</div>
+              <div class="setting-sub">ZeeBot / OpenClaw endpoint</div>
+            </div>
+            <input class="url-input" value="https://zeebot.local/api" />
+          </div>
+        </div>
+      </section>
+
+      <nav class="bottom-nav five-tabs">
+        <button class="tab-btn active" data-screen="chat"><span>💬</span><span>Chat</span></button>
+        <button class="tab-btn" data-screen="threads"><span>🧵</span><span>Threads</span></button>
+        <button class="tab-btn" data-screen="voice"><span>🎙</span><span>Voice</span></button>
+        <button class="tab-btn" data-screen="attachments"><span>📎</span><span>Files</span></button>
+        <button class="tab-btn" data-screen="settings"><span>⚙️</span><span>Settings</span></button>
+      </nav>
+
+      <div class="bottom-sheet hidden" id="subagentSheet">
+        <div class="sheet-handle"></div>
+        <div class="sheet-head">
+          <div>
+            <div class="sheet-title">Create subagent</div>
+            <div class="sheet-sub">Start a focused conversation with a specialist.</div>
+          </div>
+          <button class="icon-plain" id="closeSheetBtn">✕</button>
+        </div>
+
+        <div class="sheet-options">
+          <button class="sheet-option" data-create-agent="research"><div><div class="option-title">Research</div><div class="option-sub">Deep dives, synthesis, and sourcing</div></div><span>→</span></button>
+          <button class="sheet-option" data-create-agent="coding"><div><div class="option-title">Coding</div><div class="option-sub">Build features, review code, iterate quickly</div></div><span>→</span></button>
+          <button class="sheet-option" data-create-agent="ops"><div><div class="option-title">Ops</div><div class="option-sub">Workflows, normalization, automation planning</div></div><span>→</span></button>
+        </div>
+      </div>
+
+      <div class="sheet-backdrop hidden" id="sheetBackdrop"></div>
+    </div>
+  </main>
+
+  <script src="script.js?v=20260321c"></script>
+</body>
+</html>
