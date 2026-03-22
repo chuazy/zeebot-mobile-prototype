@@ -14,13 +14,14 @@
   --accent-soft: rgba(138,180,255,0.12);
   --green: #33d17a;
 }
-* { box-sizing: border-box; }
-html, body { height: 100%; }
+* { box-sizing: border-box; min-width: 0; }
+html, body { height: 100%; width: 100%; overflow-x: hidden; }
 body {
   margin: 0;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background: radial-gradient(circle at top, rgba(138,180,255,0.12), transparent 35%), linear-gradient(180deg, #0a0c11 0%, #08090d 100%);
   color: var(--text);
+  overflow-x: hidden;
 }
 .device-stage { min-height: 100dvh; height: 100dvh; display: grid; place-items: center; padding: 24px; }
 .phone-frame {
@@ -63,9 +64,9 @@ h1 { font-size: 24px; margin: 0; font-weight: 700; }
   padding: 0 8px;
 }
 .title-row-centered { justify-content: center; }
-.screen { display: none; min-height: 0; }
-.screen.active { display: flex; flex-direction: column; min-height: 0; }
-.section-scroll { flex: 1; min-height: 0; overflow: auto; padding: 16px 16px 8px; }
+.screen { display: none; min-height: 0; min-width: 0; }
+.screen.active { display: flex; flex-direction: column; min-height: 0; min-width: 0; }
+.section-scroll { flex: 1; min-height: 0; min-width: 0; overflow: auto; overflow-x: hidden; padding: 16px 16px 8px; }
 .chat-screen { display: flex; flex-direction: column; justify-content: flex-start; }
 .prompt-hint { text-align: center; font-size: 14px; margin: 4px 0 14px; }
 .context-card, .sheet-card, .threads-header-card { background: var(--surface-2); border: 1px solid var(--line); border-radius: 22px; padding: 14px; backdrop-filter: blur(8px); }
@@ -74,9 +75,9 @@ h1 { font-size: 24px; margin: 0; font-weight: 700; }
 .suggestion-row { display: flex; gap: 8px; overflow-x: auto; margin-top: 14px; }
 .suggestion-row.compact { margin-bottom: 8px; }
 .suggest-chip { background: rgba(255,255,255,0.04); color: var(--text); border-radius: 999px; padding: 10px 12px; white-space: nowrap; border: 1px solid var(--line); }
-.messages { display: flex; flex-direction: column; gap: 16px; padding-bottom: 8px; }
+.messages { display: flex; flex-direction: column; gap: 16px; padding-bottom: 8px; min-width: 0; overflow-x: hidden; }
 .messages#messages { flex: 1; }
-.msg { display: flex; gap: 10px; }
+.msg { display: flex; gap: 10px; min-width: 0; max-width: 100%; }
 .msg.user { justify-content: flex-end; }
 .avatar-mini { width: 30px; height: 30px; border-radius: 12px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); display: grid; place-items: center; font-size: 13px; font-weight: 700; flex: 0 0 auto; }
 .msg-body { display: flex; flex-direction: column; align-items: flex-start; max-width: min(82%, calc(100% - 44px)); min-width: 0; }
