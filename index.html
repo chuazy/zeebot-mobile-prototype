@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ZeeBot Mobile Prototype</title>
-  <link rel="stylesheet" href="styles.css?v=20260321c" />
+  <link rel="stylesheet" href="styles.css?v=20260322b" />
 </head>
 <body>
   <main class="device-stage">
@@ -18,32 +18,23 @@
         </div>
       </div>
 
-      <header class="app-header">
-        <div class="app-header-top">
-          <div>
+      <header class="app-header compact-header">
+        <div class="app-header-top app-header-native">
+          <button class="context-menu-btn" id="openSubagentBtn" aria-label="Open conversations and subagents">
+            <span class="context-menu-icon">☰</span>
+            <span class="context-menu-label" id="contextMenuLabel">Main</span>
+          </button>
+
+          <div class="header-center">
             <div class="eyebrow">ZeeBot Companion</div>
-            <div class="title-row">
+            <div class="title-row title-row-centered">
               <h1 id="screenTitle">Main</h1>
               <span class="live-pill">Connected</span>
             </div>
             <p id="screenSubtitle">Conversation with ZeeBot</p>
           </div>
+
           <button class="avatar-btn">Z</button>
-        </div>
-
-        <div class="hero-card" id="chatHero">
-          <div>
-            <div class="hero-title">A calmer, more premium assistant UI</div>
-            <div class="hero-sub">Less dashboard, more conversation. Fast jumps into focused agent threads when needed.</div>
-          </div>
-          <button class="hero-action" id="openSubagentBtn">+ New subagent</button>
-        </div>
-
-        <div class="agent-switcher">
-          <button class="agent-pill active" data-agent="main">Main</button>
-          <button class="agent-pill" data-agent="research">Research</button>
-          <button class="agent-pill" data-agent="coding">Coding</button>
-          <button class="agent-pill" data-agent="ops">Ops</button>
         </div>
       </header>
 
@@ -85,24 +76,24 @@
           <div class="suggestion-row compact">
             <button class="suggest-chip">Summarize today</button>
             <button class="suggest-chip">Open research thread</button>
-            <button class="suggest-chip">Reply by voice</button>
+            <button class="suggest-chip">Capture quick note</button>
           </div>
         </div>
 
         <div class="composer-wrap">
           <div class="attachment-bar" id="attachmentBar">
             <button class="attachment-chip">📄 carro-process-map.pdf</button>
-            <button class="attachment-chip">🎤 voice-note.m4a</button>
+            <button class="attachment-chip">📝 meeting-notes.txt</button>
           </div>
           <div class="composer-card premium">
             <button class="round-btn" id="attachBtn" title="Attach file">📎</button>
             <div class="input-stack">
               <input id="chatInput" type="text" placeholder="Message ZeeBot..." />
-              <div class="input-subhint">Type a message or tap the mic below to talk</div>
+              <div class="input-subhint">Type a message or use the center mic to jump back here fast</div>
             </div>
             <button class="send-btn" id="sendBtn">➤</button>
           </div>
-          <div class="composer-hint">Type a message or use the mic.</div>
+          <div class="composer-hint">Type a message, attach a file, or use the center mic as a quick return-to-chat shortcut.</div>
         </div>
       </section>
 
@@ -167,7 +158,7 @@
           <div class="sheet-card upload-card soft-card">
             <div class="upload-badge">⬆</div>
             <div class="attachment-title">Upload attachments</div>
-            <div class="attachment-sub">Images, PDFs, docs, audio notes</div>
+            <div class="attachment-sub">Images, PDFs, docs, and notes</div>
             <div class="attachment-actions">
               <button class="primary-btn">Choose file</button>
               <button class="secondary-btn">Take photo</button>
@@ -184,8 +175,8 @@
 
           <div class="sheet-card file-row">
             <div>
-              <div class="file-name">voice-note.m4a</div>
-              <div class="file-meta">38 sec · Transcribe + send</div>
+              <div class="file-name">meeting-notes.txt</div>
+              <div class="file-meta">12 KB · Ready to attach</div>
             </div>
             <button class="secondary-btn small">Attach</button>
           </div>
@@ -196,20 +187,20 @@
         <div class="section-scroll stack-gap">
           <div class="sheet-card setting-row">
             <div>
-              <div class="setting-title">Default reply mode</div>
-              <div class="setting-sub">Text, voice, or both</div>
+              <div class="setting-title">Default reply style</div>
+              <div class="setting-sub">Choose how ZeeBot should answer in chat</div>
             </div>
             <select>
-              <option>Both</option>
-              <option>Text only</option>
-              <option>Voice only</option>
+              <option>Rich text</option>
+              <option>Short answers</option>
+              <option>Checklist format</option>
             </select>
           </div>
 
           <div class="sheet-card setting-row">
             <div>
-              <div class="setting-title">Auto-play voice reply</div>
-              <div class="setting-sub">Play audio automatically when available</div>
+              <div class="setting-title">Keep composer expanded</div>
+              <div class="setting-sub">Show the larger message composer by default</div>
             </div>
             <label class="switch"><input type="checkbox" checked><span></span></label>
           </div>
@@ -227,7 +218,7 @@
       <nav class="bottom-nav bottom-nav-mic">
         <button class="tab-btn active" data-screen="chat"><span>💬</span><span>Chat</span></button>
         <button class="tab-btn" data-screen="threads"><span>🧵</span><span>Threads</span></button>
-        <button class="mic-nav-btn" id="navMicBtn" aria-label="Hold to talk"><span>🎙</span></button>
+        <button class="mic-nav-btn" id="navMicBtn" aria-label="Jump to chat composer"><span>🎙</span></button>
         <button class="tab-btn" data-screen="attachments"><span>📎</span><span>Files</span></button>
         <button class="tab-btn" data-screen="settings"><span>⚙️</span><span>Settings</span></button>
       </nav>
@@ -253,6 +244,6 @@
     </div>
   </main>
 
-  <script src="script.js?v=20260321c"></script>
+  <script src="script.js?v=20260322b"></script>
 </body>
 </html>
