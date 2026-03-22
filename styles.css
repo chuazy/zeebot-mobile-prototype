@@ -31,37 +31,40 @@ body {
 }
 .status-bar { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px 6px; font-size: 13px; color: rgba(255,255,255,0.92); }
 .status-icons { display: flex; gap: 8px; align-items: center; }
-.app-header { padding: 10px 16px 10px; border-bottom: 1px solid var(--line); background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0)); }
-.app-header-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 0; }
+.app-header { padding: 8px 12px 8px; border-bottom: 1px solid var(--line); background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0)); min-width: 0; }
+.app-header-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 0; min-width: 0; }
 .compact-header { flex: 0 0 auto; }
 .app-header-native { align-items: center; }
 .eyebrow, .meta, .mini-label, .attachment-sub, .file-meta, .setting-sub, #screenSubtitle, .context-sub, .hero-sub, .sheet-sub, .option-sub, .thread-sub, .thread-preview, .prompt-hint, .composer-hint { color: var(--muted); }
-.eyebrow { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
-.title-row { display: flex; align-items: center; gap: 8px; }
-h1 { font-size: 24px; margin: 0; font-weight: 700; }
-#screenSubtitle { margin: 4px 0 0; font-size: 13px; }
-.live-pill, .mini-chip { border: 1px solid rgba(51,209,122,0.25); background: rgba(51,209,122,0.08); color: #7ce7a6; border-radius: 999px; padding: 6px 10px; font-size: 12px; }
+.eyebrow { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 2px; }
+.title-row { display: flex; align-items: center; gap: 6px; min-width: 0; }
+h1 { font-size: 20px; margin: 0; font-weight: 700; line-height: 1.1; }
+#screenSubtitle { margin: 2px 0 0; font-size: 12px; }
+.live-pill, .mini-chip { border: 1px solid rgba(51,209,122,0.25); background: rgba(51,209,122,0.08); color: #7ce7a6; border-radius: 999px; padding: 4px 8px; font-size: 11px; }
 .avatar-btn, .round-btn, .play-btn, .secondary-btn, .tab-btn, .mini-chip, .hero-action, .sheet-option, .icon-plain, .suggest-chip, .thread-card, .attachment-chip, .mic-nav-btn, .context-menu-btn { border: 0; cursor: pointer; }
-.avatar-btn { width: 40px; height: 40px; border-radius: 14px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: white; font-weight: 800; }
+.avatar-btn { width: 36px; height: 36px; border-radius: 12px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: white; font-weight: 800; flex: 0 0 auto; }
 .hero-action { white-space: nowrap; padding: 10px 14px; border-radius: 16px; background: rgba(255,255,255,0.08); color: white; align-self: flex-start; max-width: 100%; }
 .small-action { padding: 8px 12px; }
 .context-menu-btn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 12px;
-  border-radius: 16px;
+  gap: 6px;
+  padding: 8px 10px;
+  border-radius: 14px;
   background: rgba(255,255,255,0.06);
   color: var(--text);
-  min-width: 82px;
+  min-width: 68px;
+  max-width: 88px;
+  flex: 0 0 auto;
 }
-.context-menu-icon { font-size: 16px; line-height: 1; }
-.context-menu-label { font-weight: 700; }
+.context-menu-icon { font-size: 15px; line-height: 1; }
+.context-menu-label { font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .header-center {
   min-width: 0;
-  flex: 1;
+  flex: 1 1 auto;
   text-align: center;
-  padding: 0 8px;
+  padding: 0 4px;
+  overflow: hidden;
 }
 .title-row-centered { justify-content: center; }
 .screen { display: none; min-height: 0; min-width: 0; }
@@ -152,7 +155,7 @@ h1 { font-size: 24px; margin: 0; font-weight: 700; }
 @media (max-width: 460px) {
   .device-stage { padding: 0; }
   .phone-frame { width: 100vw; height: 100dvh; border-radius: 0; border: 0; }
-  .app-header { padding: 10px 14px 10px; }
+  .app-header { padding: 8px 10px 8px; }
   .section-scroll { padding: 14px 14px 8px; }
   .composer-wrap { padding: 8px 14px calc(10px + env(safe-area-inset-bottom)); }
   .msg-body { max-width: 80%; }
