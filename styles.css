@@ -95,13 +95,11 @@ h1 { font-size: 20px; margin: 0; font-weight: 700; line-height: 1.1; }
 .composer-card.premium { background: rgba(255,255,255,0.03); box-shadow: 0 -1px 0 rgba(255,255,255,0.02) inset; }
 .round-btn { width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,0.05); color: var(--text); font-size: 17px; }
 .round-btn.muted { background: rgba(255,255,255,0.03); }
-.input-stack { min-width: 0; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); border-radius: 18px; padding: 8px 10px; }
-.input-subhint { font-size: 10px; color: var(--muted); margin-top: 4px; }
-#chatInput, .url-input, select { width: 100%; min-width: 0; border: 0; outline: none; background: transparent; color: var(--text); font-size: 15px; line-height: 1.3; }
+.input-stack { min-width: 0; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 6px 10px; }
+#chatInput, .url-input, select { width: 100%; min-width: 0; border: 0; outline: none; background: transparent; color: var(--text); font-size: 15px; line-height: 1.25; }
 #chatInput::placeholder { color: #c8d0de; }
 .send-btn, .primary-btn { border: 0; cursor: pointer; background: #f4f7ff; color: #0d1420; border-radius: 16px; font-weight: 700; }
 .send-btn { width: 42px; height: 42px; }
-.composer-hint { font-size: 12px; margin-top: 6px; padding-left: 6px; }
 .stack-gap { display: flex; flex-direction: column; gap: 14px; }
 .soft-card { background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.025)); border: 1px solid var(--line); border-radius: 28px; }
 .primary-btn, .secondary-btn { min-height: 46px; padding: 0 16px; }
@@ -178,17 +176,13 @@ h1 { font-size: 20px; margin: 0; font-weight: 700; line-height: 1.1; }
   }
 
   .input-stack {
-    padding: 12px 12px;
-    border-radius: 18px;
-    min-height: 52px;
+    padding: 8px 10px;
+    border-radius: 16px;
+    min-height: 44px;
   }
 
   #chatInput {
     font-size: 16px;
-  }
-
-  .input-subhint {
-    display: none;
   }
 
   .send-btn {
