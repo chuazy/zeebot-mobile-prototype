@@ -41,7 +41,7 @@ body {
 h1 { font-size: 20px; margin: 0; font-weight: 700; line-height: 1.1; }
 #screenSubtitle { margin: 2px 0 0; font-size: 12px; }
 .live-pill, .mini-chip { border: 1px solid rgba(51,209,122,0.25); background: rgba(51,209,122,0.08); color: #7ce7a6; border-radius: 999px; padding: 4px 8px; font-size: 11px; }
-.avatar-btn, .round-btn, .play-btn, .secondary-btn, .tab-btn, .mini-chip, .hero-action, .sheet-option, .icon-plain, .suggest-chip, .thread-card, .attachment-chip, .mic-nav-btn, .context-menu-btn { border: 0; cursor: pointer; }
+.avatar-btn, .round-btn, .play-btn, .secondary-btn, .tab-btn, .mini-chip, .hero-action, .sheet-option, .icon-plain, .thread-card, .attachment-chip, .mic-nav-btn, .context-menu-btn { border: 0; cursor: pointer; }
 .avatar-btn { width: 36px; height: 36px; border-radius: 12px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: white; font-weight: 800; flex: 0 0 auto; }
 .hero-action { white-space: nowrap; padding: 10px 14px; border-radius: 16px; background: rgba(255,255,255,0.08); color: white; align-self: flex-start; max-width: 100%; }
 .small-action { padding: 8px 12px; }
@@ -75,9 +75,6 @@ h1 { font-size: 20px; margin: 0; font-weight: 700; line-height: 1.1; }
 .context-card, .sheet-card, .threads-header-card { background: var(--surface-2); border: 1px solid var(--line); border-radius: 22px; padding: 14px; backdrop-filter: blur(8px); }
 .context-card { display: flex; justify-content: space-between; gap: 12px; align-items: center; margin-bottom: 12px; }
 .context-title, .attachment-title, .file-name, .setting-title, .sheet-title, .option-title, .thread-title { font-weight: 700; }
-.suggestion-row { display: flex; gap: 8px; overflow-x: auto; margin-top: 14px; }
-.suggestion-row.compact { margin-bottom: 8px; }
-.suggest-chip { background: rgba(255,255,255,0.04); color: var(--text); border-radius: 999px; padding: 10px 12px; white-space: nowrap; border: 1px solid var(--line); }
 .messages { display: flex; flex-direction: column; gap: 16px; padding-bottom: 8px; min-width: 0; overflow-x: hidden; }
 .messages#messages { flex: 1; }
 .msg { display: flex; gap: 10px; min-width: 0; max-width: 100%; }
