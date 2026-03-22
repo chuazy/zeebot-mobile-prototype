@@ -96,8 +96,13 @@ h1 { font-size: 20px; margin: 0; font-weight: 700; line-height: 1.1; }
 .round-btn { width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,0.05); color: var(--text); font-size: 17px; }
 .round-btn.muted { background: rgba(255,255,255,0.03); }
 .input-stack { min-width: 0; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 6px 10px; }
-#chatInput, .url-input, select { width: 100%; min-width: 0; border: 0; outline: none; background: transparent; color: var(--text); font-size: 15px; line-height: 1.25; }
-#chatInput::placeholder { color: #c8d0de; }
+#chatInput, .url-input, select, .api-base-input { width: 100%; min-width: 0; border: 0; outline: none; background: transparent; color: var(--text); font-size: 15px; line-height: 1.25; }
+#chatInput::placeholder, .api-base-input::placeholder { color: #c8d0de; }
+.api-base-input {
+  margin-top: 4px;
+  font-size: 11px;
+  color: var(--muted);
+}
 .send-btn, .primary-btn { border: 0; cursor: pointer; background: #f4f7ff; color: #0d1420; border-radius: 16px; font-weight: 700; }
 .send-btn { width: 42px; height: 42px; }
 .stack-gap { display: flex; flex-direction: column; gap: 14px; }

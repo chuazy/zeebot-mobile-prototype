@@ -18,6 +18,7 @@ const titleEl = document.getElementById('screenTitle');
 const subtitleEl = document.getElementById('screenSubtitle');
 const sendBtn = document.getElementById('sendBtn');
 const chatInput = document.getElementById('chatInput');
+const apiBaseInput = document.getElementById('apiBaseInput');
 const messages = document.getElementById('messages');
 const openSubagentBtn = document.getElementById('openSubagentBtn');
 const openSubagentBtn2 = document.getElementById('openSubagentBtn2');
@@ -35,6 +36,51 @@ const attachmentBar = document.getElementById('attachmentBar');
 let currentAgent = 'main';
 let currentScreen = 'chat';
 let micShortcutTimeout = null;
+
+function getApiBase() {
+  return (apiBaseInput?.value || 'http://10.9.9.23:3000').replace(/\/$/, '');
+}
+
+function appendMessage(role, content, metaLabel) {
+  const wrap = document.createElement('div');
+  wrap.className = `msg ${role === 'user' ? 'user' : 'bot'}`;
+
+  if (role === 'user') {
+    wrap.innerHTML = `<div class="msg-body"><div class="bubble"></div><div class="meta">${metaLabel}</div></div>`;
+    wrap.querySelector('.bubble').textContent = content;
+  } else {
+    wrap.innerHTML = `<div class="avatar-mini">Z</div><div class="msg-body"><div class="bubble"></div><div class="meta">${metaLabel}</div></div>`;
+    wrap.querySelector('.bubble').textContent = content;
+  }
+
+  messages.appendChild(wrap);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+async function sendMessageToApi() {
+  const text = chatInput.value.trim();
+  if (!text) return;
+
+  appendMessage('user', text, 'You · just now');
+  chatInput.value = '';
+
+  try {
+    const response = await fetch(`${getApiBase()}/api/conversations/main/messages`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ content: text, role: 'user' })
+    });
+
+    if (!response.ok) {
+      throw new Error(`API ${response.status}`);
+    }
+
+    const data = await response.json();
+    appendMessage('assistant', data.reply?.content || 'No reply returned.', 'ZeeBot · just now');
+  } catch (error) {
+    appendMessage('assistant', `API error: ${error.message}. Check the API base URL and whether the server is reachable.`, 'ZeeBot · error');
+  }
+}
 
 function refreshHeader() {
   contextMenuLabel.textContent = agentInfo[currentAgent].title;
@@ -102,21 +148,12 @@ navButtons.forEach(btn => btn.addEventListener('click', () => setScreen(btn.data
 jumpButtons.forEach(btn => btn.addEventListener('click', () => setScreen(btn.dataset.screenJump)));
 threadButtons.forEach(btn => btn.addEventListener('click', () => { setAgent(btn.dataset.threadAgent); setScreen('chat'); }));
 
-sendBtn.addEventListener('click', () => {
-  const text = chatInput.value.trim();
-  if (!text) return;
-  const userMsg = document.createElement('div');
-  userMsg.className = 'msg user';
-  userMsg.innerHTML = `<div class="msg-body"><div class="bubble"></div><div class="meta">You · just now</div></div>`;
-  userMsg.querySelector('.bubble').textContent = text;
-  messages.appendChild(userMsg);
-
-  const botMsg = document.createElement('div');
-  botMsg.className = 'msg bot';
-  botMsg.innerHTML = `<div class="avatar-mini">Z</div><div class="msg-body"><div class="bubble">Got it. In the real app this would route to the <strong>${agentInfo[currentAgent].title}</strong> thread and stream the reply back here.</div><div class="meta">ZeeBot · just now</div></div>`;
-  messages.appendChild(botMsg);
-  chatInput.value = '';
-  messages.scrollTop = messages.scrollHeight;
+sendBtn.addEventListener('click', sendMessageToApi);
+chatInput.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter' && !event.shiftKey) {
+    event.preventDefault();
+    sendMessageToApi();
+  }
 });
 
 openSubagentBtn.addEventListener('click', openSheet);
