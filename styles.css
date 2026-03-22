@@ -79,10 +79,10 @@ h1 { font-size: 24px; margin: 0; font-weight: 700; }
 .msg { display: flex; gap: 10px; }
 .msg.user { justify-content: flex-end; }
 .avatar-mini { width: 30px; height: 30px; border-radius: 12px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); display: grid; place-items: center; font-size: 13px; font-weight: 700; flex: 0 0 auto; }
-.msg-body { display: flex; flex-direction: column; align-items: flex-start; max-width: 82%; }
-.msg.user .msg-body { align-items: flex-end; }
-.bubble { padding: 14px 16px; border-radius: 24px; line-height: 1.45; background: var(--panel-2); box-shadow: inset 0 1px 0 rgba(255,255,255,0.02); }
-.msg.user .bubble { background: #f4f7ff; color: #101623; }
+.msg-body { display: flex; flex-direction: column; align-items: flex-start; max-width: min(82%, calc(100% - 44px)); min-width: 0; }
+.msg.user .msg-body { align-items: flex-end; max-width: min(72%, calc(100% - 20px)); }
+.bubble { display: inline-block; width: fit-content; padding: 14px 16px; border-radius: 24px; line-height: 1.45; background: var(--panel-2); box-shadow: inset 0 1px 0 rgba(255,255,255,0.02); max-width: 100%; overflow-wrap: anywhere; word-break: break-word; }
+.msg.user .bubble { background: #f4f7ff; color: #101623; max-width: 100%; }
 .with-audio { display: flex; flex-direction: column; gap: 10px; }
 .assistant-actions { display: flex; gap: 8px; flex-wrap: wrap; }
 .play-btn { align-self: flex-start; background: rgba(255,255,255,0.06); color: var(--text); border-radius: 14px; padding: 10px 12px; }
