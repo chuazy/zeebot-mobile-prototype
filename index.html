@@ -94,16 +94,15 @@
             <button class="attachment-chip">📄 carro-process-map.pdf</button>
             <button class="attachment-chip">🎤 voice-note.m4a</button>
           </div>
-          <div class="composer-card premium with-ptt">
+          <div class="composer-card premium">
             <button class="round-btn" id="attachBtn" title="Attach file">📎</button>
             <div class="input-stack">
-              <input id="chatInput" type="text" placeholder="Type a message to ZeeBot..." />
-              <div class="input-subhint">Ask anything, send files, or hold to talk</div>
+              <input id="chatInput" type="text" placeholder="Message ZeeBot..." />
+              <div class="input-subhint">Type a message or tap the mic below to talk</div>
             </div>
-            <button class="ptt-btn" id="pttBtn">Hold to talk</button>
             <button class="send-btn" id="sendBtn">➤</button>
           </div>
-          <div class="composer-hint">Type, attach files, or hold to talk.</div>
+          <div class="composer-hint">Type a message or use the mic.</div>
         </div>
       </section>
 
@@ -160,32 +159,6 @@
             </div>
             <div class="thread-preview">Session routing, upload flow, reply mode semantics, security boundary.</div>
           </button>
-        </div>
-      </section>
-
-      <section class="screen" id="screen-voice">
-        <div class="section-scroll voice-layout">
-          <div class="voice-mode-card soft-card">
-            <div class="voice-orb" id="voiceOrb">🎙</div>
-            <div class="voice-title">Talk naturally</div>
-            <div class="voice-sub" id="voiceStatus">Tap to start speaking to the selected agent.</div>
-            <div class="voice-toggle-row">
-              <button class="secondary-btn active-soft">Text + voice</button>
-              <button class="secondary-btn">Voice only</button>
-            </div>
-            <button class="primary-btn" id="startVoiceBtn">Start listening</button>
-          </div>
-
-          <div class="sheet-card transcript-card">
-            <div class="mini-label">Live transcript</div>
-            <p>“Switch me to the research agent and summarize the market structure.”</p>
-          </div>
-
-          <div class="sheet-card transcript-card">
-            <div class="mini-label">Voice reply</div>
-            <p>Research agent is ready. I can answer in text, voice, or both.</p>
-            <button class="play-btn">▶ Play response</button>
-          </div>
         </div>
       </section>
 
@@ -251,10 +224,10 @@
         </div>
       </section>
 
-      <nav class="bottom-nav five-tabs">
+      <nav class="bottom-nav bottom-nav-mic">
         <button class="tab-btn active" data-screen="chat"><span>💬</span><span>Chat</span></button>
         <button class="tab-btn" data-screen="threads"><span>🧵</span><span>Threads</span></button>
-        <button class="tab-btn" data-screen="voice"><span>🎙</span><span>Voice</span></button>
+        <button class="mic-nav-btn" id="navMicBtn" aria-label="Hold to talk"><span>🎙</span></button>
         <button class="tab-btn" data-screen="attachments"><span>📎</span><span>Files</span></button>
         <button class="tab-btn" data-screen="settings"><span>⚙️</span><span>Settings</span></button>
       </nav>

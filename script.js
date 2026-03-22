@@ -8,7 +8,6 @@ const agentInfo = {
 const screenTitles = {
   chat: null,
   threads: 'Threads',
-  voice: 'Voice mode',
   attachments: 'Attachments',
   settings: 'Settings'
 };
@@ -21,9 +20,6 @@ const subtitleEl = document.getElementById('screenSubtitle');
 const sendBtn = document.getElementById('sendBtn');
 const chatInput = document.getElementById('chatInput');
 const messages = document.getElementById('messages');
-const startVoiceBtn = document.getElementById('startVoiceBtn');
-const voiceStatus = document.getElementById('voiceStatus');
-const voiceOrb = document.getElementById('voiceOrb');
 const openSubagentBtn = document.getElementById('openSubagentBtn');
 const openSubagentBtn2 = document.getElementById('openSubagentBtn2');
 const closeSheetBtn = document.getElementById('closeSheetBtn');
@@ -33,13 +29,12 @@ const createAgentButtons = document.querySelectorAll('[data-create-agent]');
 const heroCard = document.getElementById('chatHero');
 const jumpButtons = document.querySelectorAll('[data-screen-jump]');
 const threadButtons = document.querySelectorAll('[data-thread-agent]');
-const pttBtn = document.getElementById('pttBtn');
+const navMicBtn = document.getElementById('navMicBtn');
 const attachBtn = document.getElementById('attachBtn');
 const attachmentBar = document.getElementById('attachmentBar');
 
 let currentAgent = 'main';
 let currentScreen = 'chat';
-let listening = false;
 let pttActive = false;
 
 function refreshHeader() {
@@ -85,8 +80,24 @@ function closeSheet() {
 
 function setPttState(active) {
   pttActive = active;
-  pttBtn.classList.toggle('active', active);
-  pttBtn.textContent = active ? 'Listening… release to send' : 'Hold to talk';
+  navMicBtn.classList.toggle('active', active);
+  navMicBtn.innerHTML = `<span>${active ? '●' : '🎙'}</span>`;
+  if (active) {
+    setScreen('chat');
+  }
+}
+
+function appendVoiceMessage() {
+  const userMsg = document.createElement('div');
+  userMsg.className = 'msg user';
+  userMsg.innerHTML = `<div class="msg-body"><div class="bubble">[Voice note sent]</div><div class="meta">You · just now</div></div>`;
+  messages.appendChild(userMsg);
+
+  const botMsg = document.createElement('div');
+  botMsg.className = 'msg bot';
+  botMsg.innerHTML = `<div class="avatar-mini">Z</div><div class="msg-body"><div class="bubble">Voice captured. In the real app, ZeeBot would transcribe and reply in this same chat thread.</div><div class="meta">ZeeBot · just now</div></div>`;
+  messages.appendChild(botMsg);
+  messages.scrollTop = messages.scrollHeight;
 }
 
 agentButtons.forEach(btn => btn.addEventListener('click', () => setAgent(btn.dataset.agent)));
@@ -111,13 +122,6 @@ sendBtn.addEventListener('click', () => {
   messages.scrollTop = messages.scrollHeight;
 });
 
-startVoiceBtn.addEventListener('click', () => {
-  listening = !listening;
-  voiceOrb.classList.toggle('listening', listening);
-  startVoiceBtn.textContent = listening ? 'Stop listening' : 'Start listening';
-  voiceStatus.textContent = listening ? `Listening to you for ${agentInfo[currentAgent].title}...` : 'Tap to start speaking to the selected agent.';
-});
-
 openSubagentBtn.addEventListener('click', openSheet);
 openSubagentBtn2.addEventListener('click', openSheet);
 closeSheetBtn.addEventListener('click', closeSheet);
@@ -137,11 +141,17 @@ createAgentButtons.forEach(btn => {
   });
 });
 
-pttBtn.addEventListener('mousedown', () => setPttState(true));
-pttBtn.addEventListener('mouseup', () => setPttState(false));
-pttBtn.addEventListener('mouseleave', () => setPttState(false));
-pttBtn.addEventListener('touchstart', (e) => { e.preventDefault(); setPttState(true); }, { passive: false });
-pttBtn.addEventListener('touchend', () => setPttState(false));
+navMicBtn.addEventListener('mousedown', () => setPttState(true));
+navMicBtn.addEventListener('mouseup', () => {
+  if (pttActive) appendVoiceMessage();
+  setPttState(false);
+});
+navMicBtn.addEventListener('mouseleave', () => setPttState(false));
+navMicBtn.addEventListener('touchstart', (e) => { e.preventDefault(); setPttState(true); }, { passive: false });
+navMicBtn.addEventListener('touchend', () => {
+  if (pttActive) appendVoiceMessage();
+  setPttState(false);
+});
 attachBtn.addEventListener('click', () => {
   attachmentBar.scrollLeft = attachmentBar.scrollWidth;
 });
