@@ -19,10 +19,13 @@ Current agreed UI direction under test:
 6. Attachments
 7. Product Workflow & User Goal Validation
 8. Async Work Visibility & Trust Signals
-9. Responsiveness & Device Adaptation
-10. Overflow Prevention & Content Resilience
-11. Usability & Interaction Quality
-12. Regression Coverage
+9. Notification Behavior
+10. Approval & Review Flows
+11. Task Lifecycle & Recovery
+12. Responsiveness & Device Adaptation
+13. Overflow Prevention & Content Resilience
+14. Usability & Interaction Quality
+15. Regression Coverage
 
 ---
 
@@ -551,7 +554,189 @@ Run on every build / high-frequency validation.
 - Status is summarized in plain terms.
 - Trust in workflow continuity is reinforced.
 
-### 9. Responsiveness & Device Adaptation
+### 9. Notification Behavior
+
+#### NTF-01 — Task start notification appears when meaningful work begins
+**Preconditions:** A meaningful background task is started.  
+**Steps:**
+1. Trigger a task that should run asynchronously.
+2. Observe notification behavior.
+
+**Expected Results:**
+- A visible task-start notification or in-app alert appears.
+- The notification clearly indicates that work has started.
+- The event is distinguishable from completion.
+
+#### NTF-02 — Long-running task generates a running-status signal
+**Preconditions:** A task runs longer than the defined threshold.  
+**Steps:**
+1. Start a long-running task.
+2. Wait through the running threshold.
+
+**Expected Results:**
+- A running-status notification or in-app update appears.
+- The user can tell the task is still in progress.
+- Repeated notifications are rate-limited.
+
+#### NTF-03 — Blocked task notification is distinct
+**Preconditions:** A task enters blocked state.  
+**Steps:**
+1. Simulate or trigger a blocked task.
+
+**Expected Results:**
+- Blocked state is visibly distinct.
+- The notification explains the blocker at a practical level.
+- The user can tell the task is no longer progressing.
+
+#### NTF-04 — Completion notification is singular and clear
+**Preconditions:** A background task completes.  
+**Steps:**
+1. Complete a task.
+2. Observe notifications.
+
+**Expected Results:**
+- Completion notification appears once.
+- It clearly references the completed task.
+- No duplicate completion alerts are sent.
+
+#### NTF-05 — New message notification lands user in the correct thread
+**Preconditions:** A new ZeeBot message is generated out of current view.  
+**Steps:**
+1. Trigger a meaningful new reply.
+2. Open the notification.
+
+**Expected Results:**
+- The user lands in the correct thread/message context.
+- Notification type is distinguishable from task-state alerts.
+
+### 10. Approval & Review Flows
+
+#### APR-01 — Approval-required action is clearly presented
+**Preconditions:** A sensitive action requiring approval is proposed.  
+**Steps:**
+1. Trigger an approval-required scenario.
+
+**Expected Results:**
+- The approval request is visibly distinct.
+- The user can understand what requires approval.
+- The app does not silently proceed.
+
+#### APR-02 — Action preview is understandable on mobile
+**Preconditions:** Approval-required action available.  
+**Steps:**
+1. Open the approval request.
+2. Review the preview.
+
+**Expected Results:**
+- The preview is readable on mobile.
+- Enough detail is present to make an informed decision.
+- The consequence of approval is understandable.
+
+#### APR-03 — User can approve cleanly
+**Preconditions:** Approval request open.  
+**Steps:**
+1. Approve the action.
+
+**Expected Results:**
+- Approval is confirmed.
+- The workflow continues appropriately.
+- The approval state is visible afterward.
+
+#### APR-04 — User can reject cleanly
+**Preconditions:** Approval request open.  
+**Steps:**
+1. Reject the action.
+
+**Expected Results:**
+- Rejection is confirmed.
+- The action does not proceed.
+- The task/workflow reflects rejected state.
+
+#### APR-05 — User can request revision instead of binary accept/reject
+**Preconditions:** Reviewable output exists.  
+**Steps:**
+1. Open review state.
+2. Request changes.
+
+**Expected Results:**
+- Revision path is captured.
+- Context is preserved.
+- The task returns to an appropriate working/review state.
+
+### 11. Task Lifecycle & Recovery
+
+#### TSK-01 — Task is represented when async work starts
+**Preconditions:** User request triggers asynchronous work.  
+**Steps:**
+1. Initiate a long-running task.
+
+**Expected Results:**
+- A task entity/state becomes visible.
+- The task is linked to the originating request.
+- The user can distinguish conversation from execution work.
+
+#### TSK-02 — Task states transition correctly
+**Preconditions:** Task lifecycle available.  
+**Steps:**
+1. Observe or simulate queued → running → review → done transitions.
+
+**Expected Results:**
+- States update consistently.
+- Plain-language labels are understandable.
+- Old states do not remain misleadingly visible.
+
+#### TSK-03 — Multiple tasks remain distinguishable
+**Preconditions:** More than one task exists.  
+**Steps:**
+1. Trigger multiple work items.
+
+**Expected Results:**
+- Tasks are visually separable.
+- The user can understand which task belongs to which request.
+- Parallel work remains legible.
+
+#### TSK-04 — User can re-enter an active task later
+**Preconditions:** Active task exists.  
+**Steps:**
+1. Leave the task context.
+2. Re-enter later.
+
+**Expected Results:**
+- The task remains discoverable.
+- Progress made while away is visible.
+- Context is recoverable quickly.
+
+#### TSK-05 — Failed task is distinguishable from blocked and running
+**Preconditions:** Simulate task failure.  
+**Steps:**
+1. Observe failed task state.
+
+**Expected Results:**
+- Failed state is clearly distinct.
+- Practical error context is provided.
+- Retry or review options are visible if supported.
+
+#### TSK-06 — Cancel running task
+**Preconditions:** Cancellable running task exists.  
+**Steps:**
+1. Cancel the task.
+
+**Expected Results:**
+- Cancellation is acknowledged.
+- Cancelled state is visible.
+- The system does not continue running the task silently.
+
+#### TSK-07 — Retry failed or blocked task
+**Preconditions:** Retryable task exists.  
+**Steps:**
+1. Retry the task.
+
+**Expected Results:**
+- A new attempt begins clearly.
+- Context is preserved.
+- Retry does not duplicate completed work incorrectly.
+
+### 12. Responsiveness & Device Adaptation
 
 #### RWD-01 — Default mobile viewport
 **Preconditions:** 390x844 or similar viewport.  
