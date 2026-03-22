@@ -17,10 +17,12 @@ Current agreed UI direction under test:
 4. Center Mic Behavior
 5. Menu & Subagent Access
 6. Attachments
-7. Responsiveness & Device Adaptation
-8. Overflow Prevention & Content Resilience
-9. Usability & Interaction Quality
-10. Regression Coverage
+7. Product Workflow & User Goal Validation
+8. Async Work Visibility & Trust Signals
+9. Responsiveness & Device Adaptation
+10. Overflow Prevention & Content Resilience
+11. Usability & Interaction Quality
+12. Regression Coverage
 
 ---
 
@@ -37,6 +39,8 @@ Run on every build / high-frequency validation.
 - **SMK-08** No horizontal overflow/cutoff on default mobile viewport
 - **SMK-09** Back navigation returns to prior screen without dead-end
 - **SMK-10** Keyboard-open state does not hide critical composer controls
+- **SMK-11** User can resume a prior conversation/thread without losing context
+- **SMK-12** Background/parallel work state is visible when relevant
 
 ---
 
@@ -430,7 +434,124 @@ Run on every build / high-frequency validation.
 
 ---
 
-### 7. Responsiveness & Device Adaptation
+### 7. Product Workflow & User Goal Validation
+
+#### PWF-01 — User can ask something immediately on app open
+**Preconditions:** App freshly launched.  
+**Steps:**
+1. Open the app.
+2. Attempt to ask ZeeBot a simple question immediately.
+
+**Expected Results:**
+- User can identify the primary action quickly.
+- Chat input is available without extra navigation.
+- No unnecessary UI blocks the ask/answer loop.
+
+#### PWF-02 — User can continue prior work without re-explaining context
+**Preconditions:** Existing conversation/thread present.  
+**Steps:**
+1. Open the Main menu.
+2. Re-enter a prior thread.
+3. Continue the conversation.
+
+**Expected Results:**
+- The prior thread is identifiable.
+- Context is preserved well enough for continuation.
+- User does not need to restart the workflow from scratch.
+
+#### PWF-03 — User can delegate focused work to a subagent
+**Preconditions:** Subagent access is available.  
+**Steps:**
+1. Open Main menu.
+2. Open subagent list.
+3. Select a specialist path.
+
+**Expected Results:**
+- Delegated work is reachable from the main shell.
+- The relationship between main chat and delegated work is understandable.
+- Main thread remains accessible.
+
+#### PWF-04 — User can review output and return to the main thread
+**Preconditions:** Thread/subagent output exists.  
+**Steps:**
+1. Open delegated output or related thread.
+2. Review it.
+3. Return to main chat.
+
+**Expected Results:**
+- Output is readable on mobile.
+- Returning to the main thread is easy.
+- Main thread state is preserved.
+
+#### PWF-05 — User can attach context and continue the same task
+**Preconditions:** Chat open.  
+**Steps:**
+1. Start drafting a request.
+2. Add an attachment.
+3. Continue editing and send.
+
+**Expected Results:**
+- Attachment augments the current task cleanly.
+- Draft text is preserved.
+- No confusing reset of task flow occurs.
+
+### 8. Async Work Visibility & Trust Signals
+
+#### ASY-01 — Running work is visibly indicated
+**Preconditions:** A background or delegated task is active.  
+**Steps:**
+1. Trigger a long-running task.
+2. Observe the app while the task is ongoing.
+
+**Expected Results:**
+- The app shows that work is still running.
+- The user is not left in an apparently idle state.
+- The status is visible enough to prevent manual check-in behavior.
+
+#### ASY-02 — Multiple active tasks are distinguishable
+**Preconditions:** More than one background task exists.  
+**Steps:**
+1. Trigger multiple work items.
+2. Observe active-work representation.
+
+**Expected Results:**
+- Distinct tasks are visually separable.
+- The user can tell that more than one workflow is active.
+- Status labels are understandable.
+
+#### ASY-03 — Blocked work is visibly different from running work
+**Preconditions:** Simulate or create blocked task state.  
+**Steps:**
+1. Observe blocked task presentation.
+
+**Expected Results:**
+- Blocked is visually distinct from running or done.
+- The user can understand that progress has stopped.
+- The system does not imply false progress.
+
+#### ASY-04 — Completed work is visibly resolved
+**Preconditions:** Background task finishes.  
+**Steps:**
+1. Complete a delegated or long-running task.
+2. Observe final task state.
+
+**Expected Results:**
+- Completion is visibly indicated.
+- The user can access the result from the originating flow.
+- The UI does not look like the task is still running.
+
+#### ASY-05 — Status visibility reduces ambiguity
+**Preconditions:** Ongoing delegated work present.  
+**Steps:**
+1. Leave and re-enter the relevant screen or thread.
+2. Inspect visible status.
+
+**Expected Results:**
+- The user can understand what is happening without asking manually.
+- Status is summarized in plain terms.
+- Trust in workflow continuity is reinforced.
+
+### 9. Responsiveness & Device Adaptation
 
 #### RWD-01 — Default mobile viewport
 **Preconditions:** 390x844 or similar viewport.  
